@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod
+  labels:
+    env: test
+  annotations:
+    description: This is a multi-container pod
+spec:
+  containers:
+    - name: c00
+      image: ubuntu
+      imagePullPolicy: IfNotPresent
+      command: ["/bin/bash", "-c", "while true; do echo Hello container c00; sleep 10; done;"]
+      env: 
+        - name: NAME
+          value: example
+
+        - name: EMAIL
+          value: example.com
+    
+    - name: c01
+      image: httpd
+      imagePullPolicy: IfNotPresent
+
+  restartPolicy: Always
