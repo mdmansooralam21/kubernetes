@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod
+  annotations:
+    desciption: This is a test pod created to practice Kubernetes
+  labels:
+    env: test
+spec: 
+  containers:
+    - name: c00
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Hello Kubernetes Pod; sleep 10; done;"]
+      env: 
+        - name: PROJECT_ID
+          value: test-project
+        
+        - name: PASSWORD
+          value: test123
+    
+  restartPolicy: Always
