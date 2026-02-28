@@ -10,6 +10,7 @@ spec:
   containers:
     - name: c00
       image: ubuntu
+      imagePullPolicy: IfNotPresent
       command: ["/bin/bash", "-c", "while true; do echo Hello Kubernetes Pod; sleep 10; done;"]
       env: 
         - name: PROJECT_ID
