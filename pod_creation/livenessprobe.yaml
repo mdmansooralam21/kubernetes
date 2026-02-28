@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: livenesspod
+  labels: 
+    env: test
+    work: livenessProbe
+spec: 
+  containers: 
+    - name: livenesscontainer
+      image: ubuntu
+      imagePullPolicy: IfNotPresent
+      args: 
+        - /bin/bash
+        - -c 
+        - touch /tmp/healthy; sleep 1000
+
+      livenessProbe: 
+        exec: 
+          command: 
+            - cat 
+            - /tmp/healthy
+      
+        initialDelaySeconds: 5 
+        periodSeconds: 5
+        timeoutSeconds: 300
+  restartPolicy: Always
