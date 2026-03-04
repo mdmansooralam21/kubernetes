@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: replicaSet
+metadata:
+  name: my-replica-set
+  selector:
+    matchExpressions:
+      - {key: myname, operator: In, values: [Mansoor, Mansur]}
+      - {key: env, operator: NotIn, values: [staging]}
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        myname: Mansoor
+    spec:
+      containers:
+        - name: ubuntu-container
+          image: ubuntu
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/bash", "-c", "while true; do echo Hello replica set; sleep 10; done"]
