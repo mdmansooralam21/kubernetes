@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deploymet
+metadata:
+  name: my-deployment
+  selector:
+    MatchLabels:
+      env: dev
+spec:
+  replicas: 3
+  selector:
+    MatchLabels:
+      env: dev
+  template:
+    metadata:
+      name: my-replica
+      labels:
+        env: dev
+    spec:
+      containers:
+        - name: c01
+          image: ubuntu
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/bash", "-c", "while true; do echo Hello Pod; sleep 15; done"]
+          resources:
+            requests:
+              cpu: "200m"
